@@ -24,7 +24,7 @@ public class Pet {
         this.weight = weight;
     }
 
-    public Pet(Kind kind, String name, String dateOfBirth, double weight) {
+    public Pet(Kind kind, String name, double weight, String dateOfBirth) {
         this.kind = kind;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -63,16 +63,17 @@ public class Pet {
         this.weight = weight;
     }
 
-    public Pet createPetFromLine(String line, String sep) {
+    public static Pet createPetFromLine(String line, String sep) {
         ArrayList<String> petToArray = parsLineToArray(line, sep);
         Pet newPet = createPetFromArray(petToArray);
         return newPet;
     }
 
-    private ArrayList<String> parsLineToArray(String line, String sep) {
+    private static ArrayList<String> parsLineToArray(String line, String sep) {
         ArrayList<String> temp = new ArrayList<>();
         int sepCurrent = line.indexOf(sep);
         if (sepCurrent != -1) {
+            temp.add(line.substring(0, sepCurrent));
             while (sepCurrent != -1) {
                 int sepNext = line.indexOf(sep, sepCurrent + 1);
                 if (sepNext == -1) {
@@ -86,7 +87,7 @@ public class Pet {
         return temp;
     }
 
-    public Pet createPetFromArray(ArrayList<String> pet) {
+    public static Pet createPetFromArray(ArrayList<String> pet) {
         Pet newPet = null;
         switch (pet.size()) {
             case (2):
@@ -96,17 +97,18 @@ public class Pet {
                 newPet = new Pet(Kind.valueOf(pet.get(0)), pet.get(1), Double.parseDouble(pet.get(2)));
                 break;
             case (4):
-                newPet = new Pet(Kind.valueOf(pet.get(0)), pet.get(1), pet.get(2), Double.parseDouble(pet.get(4)));
+                newPet = new Pet(Kind.valueOf(pet.get(0)), pet.get(1),Double.parseDouble(pet.get(2)), pet.get(3));
                 break;
         }
         return newPet;
     }
-      public String toStringPet() {
+
+    public String toStringPet() {
         return "Pet:" +
                 "kind=" + kind +
-                ", name='" + name + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", weight=" + weight;
+                ", name=" + name +
+                ", weight=" + weight +
+                ",dateOfBirth=" + dateOfBirth  ;
     }
 }
 
