@@ -64,7 +64,9 @@ public class Student {
         String line;
         do {
             line = br.readLine();
-            students.add(createStudentFromArray(parsLineToArray(line,SEP)));
+            if (line.length() > 0) {
+                students.add(createStudentFromArray(parsLineToArray(line, SEP)));
+            }
         } while (line.length() > 0);
 
         return students;
@@ -101,6 +103,18 @@ public class Student {
         return newStudent;
     }
 
+
+    public static void toPrintStudent(ArrayList<Student> students) {
+        for (Student rec : students) {
+            System.out.println("Student{" +
+                    "id=" + rec.id +
+                    ", name='" + rec.name + '\'' +
+                    ", group='" + rec.group + '\'' +
+                    ", eMail='" + rec.eMail + '\'' +
+                    '}');
+        }
+
+    }
 }
 
 
