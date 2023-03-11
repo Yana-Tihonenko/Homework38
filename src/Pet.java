@@ -101,6 +101,12 @@ public class Pet {
         }
         return newPet;
     }
-
+      public String toStringPet() {
+        return "Pet:" +
+                "kind=" + kind +
+                ", name='" + name + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", weight=" + weight;
+    }
 }
 
