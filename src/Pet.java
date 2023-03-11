@@ -97,18 +97,21 @@ public class Pet {
                 newPet = new Pet(Kind.valueOf(pet.get(0)), pet.get(1), Double.parseDouble(pet.get(2)));
                 break;
             case (4):
-                newPet = new Pet(Kind.valueOf(pet.get(0)), pet.get(1),Double.parseDouble(pet.get(2)), pet.get(3));
+                newPet = new Pet(Kind.valueOf(pet.get(0)), pet.get(1), Double.parseDouble(pet.get(2)), pet.get(3));
                 break;
         }
         return newPet;
     }
 
-    public String toPrintPet() {
-        return "Pet:" +
-                "kind=" + kind +
-                ", name=" + name +
-                ", weight=" + weight +
-                ",dateOfBirth=" + dateOfBirth  ;
+    public static  void  toPrintPet(ArrayList<Pet> petsArray) {
+        for (Pet record : petsArray) {
+            System.out.println("Pet:" +
+                    "kind=" + record.kind +
+                    ", name=" + record.name +
+                    ", weight=" +record.weight +
+                    ",dateOfBirth=" + record.dateOfBirth);
+
+        }
     }
 }
 
