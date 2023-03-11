@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+
+
 public class Pet {
     enum Kind {
         CAT,
@@ -7,8 +10,8 @@ public class Pet {
 
     Kind kind;
     String name;
-    String dateOfBirth="";
-    double weight=0.0;
+    String dateOfBirth = "";
+    double weight = 0.0;
 
     public Pet(Kind kind, String name) {
         this.kind = kind;
@@ -59,4 +62,45 @@ public class Pet {
     public void setWeight(double weight) {
         this.weight = weight;
     }
+
+    public Pet createPetFromLine(String line, String sep) {
+        ArrayList<String> petToArray = parsLineToArray(line, sep);
+        Pet newPet = createPetFromArray(petToArray);
+        return newPet;
+    }
+
+    private ArrayList<String> parsLineToArray(String line, String sep) {
+        ArrayList<String> temp = new ArrayList<>();
+        int sepCurrent = line.indexOf(sep);
+        if (sepCurrent != -1) {
+            while (sepCurrent != -1) {
+                int sepNext = line.indexOf(sep, sepCurrent + 1);
+                if (sepNext == -1) {
+                    temp.add(line.substring(sepCurrent + 1));
+                } else {
+                    temp.add(line.substring(sepCurrent + 1, sepNext));
+                }
+                sepCurrent = sepNext;
+            }
+        }
+        return temp;
+    }
+
+    public Pet createPetFromArray(ArrayList<String> pet) {
+        Pet newPet = null;
+        switch (pet.size()) {
+            case (2):
+                newPet = new Pet(Kind.valueOf(pet.get(0)), pet.get(1));
+                break;
+            case (3):
+                newPet = new Pet(Kind.valueOf(pet.get(0)), pet.get(1), Double.parseDouble(pet.get(2)));
+                break;
+            case (4):
+                newPet = new Pet(Kind.valueOf(pet.get(0)), pet.get(1), pet.get(2), Double.parseDouble(pet.get(4)));
+                break;
+        }
+        return newPet;
+    }
+
 }
+
