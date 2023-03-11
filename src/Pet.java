@@ -103,7 +103,7 @@ public class Pet {
         return newPet;
     }
 
-    public String toStringPet() {
+    public String toPrintPet() {
         return "Pet:" +
                 "kind=" + kind +
                 ", name=" + name +
